@@ -2,5 +2,5 @@
 *
 # Except this file
 !.gitignore
-# Except the database folder
-!*/Database
+# Except folders
+!*/

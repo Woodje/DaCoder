@@ -5,3 +5,4 @@ Bin/
 Debug/
 Release/
 *.cache
+*.suo
