@@ -1,0 +1,6 @@
+# Generated files
+Build/
+Bin/
+Debug/
+Release/
+*.cache
