@@ -1,4 +1,6 @@
 # Generated files
+TestResults/
+packages/
 Bin/
 Debug/
 Release/
