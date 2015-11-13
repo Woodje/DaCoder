@@ -16,15 +16,15 @@ namespace DaCoder.Data.Tests
                     from language in dataContext.Languages
                     select language;
 
-                if (queryAllLanguages.ToList().Count > 0)
-                {
-                    foreach (var language in queryAllLanguages)
-                    {
-                        dataContext.Languages.Remove(language);
-                    }
+                if (queryAllLanguages.ToList().Count <= 0)
+                    return;
 
-                    dataContext.SaveChanges();
+                foreach (var language in queryAllLanguages)
+                {
+                    dataContext.Languages.Remove(language);
                 }
+
+                dataContext.SaveChanges();
             }
         }
     }

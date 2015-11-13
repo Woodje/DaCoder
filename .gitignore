@@ -3,6 +3,11 @@ TestResults/
 packages/
 Bin/
 Debug/
+Build/*
 Release/
 *.cache
 *.suo
+
+# Except these files
+!Build/Database/dacoder.sqlite
+!Build/Database/dacodertest.sqlite
