@@ -1,27 +1,31 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DaCoder.Data.Tests
 {
+    [TestClass]
     public class FunctionalTest
     {
-        [TestInitialize]
+        [TestInitialize][TestCleanup]
         public virtual void TestInitialize()
         {
             using (var dataContext = new DataContext())
             {
-                if (dataContext.Database.Exists())
-                    dataContext.Database.Delete();
+                var queryAllLanguages =
+                    from language in dataContext.Languages
+                    select language;
 
-                dataContext.Database.Create();
+                if (queryAllLanguages.ToList().Count > 0)
+                {
+                    foreach (var language in queryAllLanguages)
+                    {
+                        dataContext.Languages.Remove(language);
+                    }
+
+                    dataContext.SaveChanges();
+                }
             }
         }
-
-        [TestCleanup]
-        public virtual void TestCleanup()
-        {
-            using (var dataContext = new DataContext())
-                if (dataContext.Database.Exists())
-                    dataContext.Database.Delete();
-        } 
     }
 }

@@ -8,6 +8,6 @@ namespace DaCoder.Data
         {
         }
 
-        public DbSet<TestModel> TestModels { get; set; }
+        public DbSet<Language> Languages { get; set; }
     }
 }

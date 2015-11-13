@@ -2,7 +2,7 @@
 
 namespace DaCoder.Data
 {
-    public class TestModel
+    public class Language
     {
         public int Id { get; set; }
 

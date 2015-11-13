@@ -8,21 +8,31 @@ namespace DaCoder.Data.Tests.UnitTests
     {
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void AddNewTestModel_ThrowsException_WhenNameIsNull()
+        public void AddNewLanguage_ThrowsException_WhenNameIsNull()
         {
             using (var businessContext = new BusinessContext())
             {
-                businessContext.AddNewTestModel(null);
+                var language = new Language
+                {
+                    Name = null
+                };
+
+                businessContext.AddNewLanguage(language);
             }
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void AddNewTestModel_ThrowsException_WhenNameIsEmpty()
+        public void AddNewLanguage_ThrowsException_WhenNameIsEmpty()
         {
             using (var businessContext = new BusinessContext())
             {
-                businessContext.AddNewTestModel("");
+                var language = new Language
+                {
+                    Name = ""
+                };
+
+                businessContext.AddNewLanguage(language);
             }
         }
     }

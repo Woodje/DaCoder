@@ -17,23 +17,23 @@ namespace DaCoder.Data
             get { return dataContext; }
         }
 
-        public TestModel AddNewTestModel(String name)
+        public void AddNewLanguage(Language language)
         {
-            if (name == null)
-                throw new ArgumentNullException("name", "name must be not-null.");
+            Check.Require(language.Name);
 
-            if (String.IsNullOrEmpty(name))
-                throw new ArgumentException("name must not be an empty string.", "name");
-
-            var testModel = new TestModel
-            {
-                Name = name,
-            };
-
-            dataContext.TestModels.Add(testModel);
+            dataContext.Languages.Add(language);
             dataContext.SaveChanges();
+        }
 
-            return testModel;
+        static class Check
+        {
+            public static void Require(String value)
+            {
+                if (value == null)
+                    throw new ArgumentNullException();
+                else if (value.Trim().Length == 0)
+                    throw new ArgumentException();
+            }
         }
 
         #region IDisposable members
