@@ -33,6 +33,37 @@ namespace DaCoder.Data
         }
 
         /// <summary>
+        /// Updates an existing language.
+        /// </summary>
+        public void UpdateLanguage(Language language)
+        {
+            Check.Require(language.Name);
+
+            Language existingLanguage = dataContext.Languages.Find(language.Id);
+
+            if (existingLanguage == null)
+                throw new ArgumentOutOfRangeException("language.Id", "Id must exist in the Languages-table.");
+
+            existingLanguage = language;
+
+            dataContext.SaveChanges();
+        }
+
+        /// <summary>
+        /// Deletes an existing language.
+        /// </summary>
+        public void DeleteLanguage(Language language)
+        {
+            language = dataContext.Languages.Find(language.Id);
+
+            if (language == null)
+                throw new ArgumentOutOfRangeException("language.Id", "Id must exist in the Languages-table.");
+
+            dataContext.Languages.Remove(language);
+            dataContext.SaveChanges();
+        }
+
+        /// <summary>
         /// Adds a new keyword.
         /// </summary>
         public void AddNewKeyword(Keyword keyword)
@@ -43,6 +74,37 @@ namespace DaCoder.Data
                 throw new ArgumentOutOfRangeException("keyword.LanguageId", "LanguageId must exist in the Languages-table.");
 
             dataContext.Keywords.Add(keyword);
+            dataContext.SaveChanges();
+        }
+
+        /// <summary>
+        /// Updates an existing keyword.
+        /// </summary>
+        public void UpdateKeyword(Keyword keyword)
+        {
+            Check.Require(keyword.Name);
+
+            Keyword existingKeyword = dataContext.Keywords.Find(keyword.Id);
+
+            if (existingKeyword == null)
+                throw new ArgumentOutOfRangeException("keyword.Id", "Id must exist in the Keywords-table.");
+
+            existingKeyword = keyword;
+
+            dataContext.SaveChanges();
+        }
+
+        /// <summary>
+        /// Deletes an existing keyword.
+        /// </summary>
+        public void DeleteKeyword(Keyword keyword)
+        {
+            keyword = dataContext.Keywords.Find(keyword.Id);
+
+            if (keyword == null)
+                throw new ArgumentOutOfRangeException("keyword.Id", "Id must exist in the Keywords-table.");
+
+            dataContext.Keywords.Remove(keyword);
             dataContext.SaveChanges();
         }
 
