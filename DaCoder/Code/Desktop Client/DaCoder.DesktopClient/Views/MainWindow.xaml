@@ -8,7 +8,7 @@
         d:DataContext="{d:DesignInstance viewModels:PluginInstallerViewModel}"
         Title="DaCoder">
 
-    <DockPanel x:Name="RootContainer">
+    <DockPanel LastChildFill="True">
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File">
                 <MenuItem Header="_New" Command="ApplicationCommands.New"/>
@@ -49,6 +49,9 @@
                 <MenuItem Header="About DaCoder" />
             </MenuItem>
         </Menu>
+
+        <Grid x:Name="RootContainer" Height="100" DockPanel.Dock="Bottom" />
+        
         <RichTextBox>
             <RichTextBox.Resources>
                 <Style TargetType="{x:Type Paragraph}">
@@ -56,5 +59,6 @@
                 </Style>
             </RichTextBox.Resources>
         </RichTextBox>
+        
     </DockPanel>
 </Window>
