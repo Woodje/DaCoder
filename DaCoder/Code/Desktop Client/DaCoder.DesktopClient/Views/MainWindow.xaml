@@ -1,9 +1,12 @@
 ﻿<Window x:Class="DaCoder.DesktopClient.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="DaCoder"
-        Height="{Binding SystemParameters.PrimaryScreenHeight}" 
-        Width="{Binding SystemParameters.PrimaryScreenWidth}">
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:DaCoder.DesktopClient.ViewModels"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance viewModels:PluginInstallerViewModel}"
+        Title="DaCoder">
 
     <DockPanel x:Name="RootContainer">
             <Menu DockPanel.Dock="Top">
@@ -32,7 +35,7 @@
                 <MenuItem Header="" IsCheckable="True" />
             </MenuItem>
             <MenuItem Header="_Plugins">
-                <MenuItem Header="_Install" />
+                <MenuItem Header="_Install" Command="{Binding AddPluginCommand}"/>
                 <Separator />
                 <MenuItem Header="" IsCheckable="True" />
             </MenuItem>
