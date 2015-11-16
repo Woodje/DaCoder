@@ -73,6 +73,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="FunctionalTest.cs" />
+    <Compile Include="FunctionalTests\KeywordScenarioTests.cs" />
     <Compile Include="FunctionalTests\LanguageScenarioTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTests\BusinessContextTests.cs" />
