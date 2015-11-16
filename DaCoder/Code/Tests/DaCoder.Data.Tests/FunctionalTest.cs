@@ -16,7 +16,7 @@ namespace DaCoder.Data.Tests
                     from language in dataContext.Languages
                     select language;
 
-                if (queryAllLanguages.ToList().Count <= 0)
+                if (queryAllLanguages.ToList().Count > 0)
                 {
                     foreach (var language in queryAllLanguages)
                     {
@@ -28,12 +28,12 @@ namespace DaCoder.Data.Tests
                     from keyword in dataContext.Keywords
                     select keyword;
 
-                if (queryAllKeywords.ToList().Count <= 0)
-                    return;
-
-                foreach (var keyword in queryAllKeywords)
+                if (queryAllKeywords.ToList().Count > 0)
                 {
-                    dataContext.Keywords.Remove(keyword);
+                    foreach (var keyword in queryAllKeywords)
+                    {
+                        dataContext.Keywords.Remove(keyword);
+                    }
                 }
 
                 dataContext.SaveChanges();
