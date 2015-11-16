@@ -9,5 +9,7 @@ namespace DaCoder.Data
         }
 
         public DbSet<Language> Languages { get; set; }
+
+        public DbSet<Keyword> Keywords { get; set; }
     }
 }

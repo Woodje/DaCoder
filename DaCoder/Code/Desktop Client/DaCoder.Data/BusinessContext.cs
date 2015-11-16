@@ -1,7 +1,11 @@
 ﻿using System;
+using System.CodeDom;
 
 namespace DaCoder.Data
 {
+    /// <summary>
+    /// Encapsulation of the business rules when accessing the data layer.
+    /// </summary>
     public class BusinessContext : IDisposable
     {
         private readonly DataContext dataContext;
@@ -17,6 +21,9 @@ namespace DaCoder.Data
             get { return dataContext; }
         }
 
+        /// <summary>
+        /// Adds a new language.
+        /// </summary>
         public void AddNewLanguage(Language language)
         {
             Check.Require(language.Name);
@@ -25,9 +32,26 @@ namespace DaCoder.Data
             dataContext.SaveChanges();
         }
 
+        /// <summary>
+        /// Adds a new keyword.
+        /// </summary>
+        public void AddNewKeyword(Keyword keyword)
+        {
+            Check.Require(keyword.Name);
+
+            if (dataContext.Languages.Find(keyword.LanguageId) == null)
+                throw new ArgumentOutOfRangeException("keyword.LanguageId", "LanguageId must exist in the Languages-table.");
+
+            dataContext.Keywords.Add(keyword);
+            dataContext.SaveChanges();
+        }
+
+        /// <summary>
+        /// Static class used for checking common requirements.
+        /// </summary>
         static class Check
         {
-            public static void Require(String value)
+            public static void Require(string value)
             {
                 if (value == null)
                     throw new ArgumentNullException();

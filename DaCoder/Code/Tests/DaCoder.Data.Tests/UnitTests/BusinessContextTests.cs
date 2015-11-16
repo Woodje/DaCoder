@@ -35,5 +35,21 @@ namespace DaCoder.Data.Tests.UnitTests
                 businessContext.AddNewLanguage(language);
             }
         }
+
+        [TestMethod]
+        [ExpectedException(typeof (ArgumentOutOfRangeException))]
+        public void AddNewKeyword_ThrowsException_WhenLanguageIdDoesNotExist()
+        {
+            using (var businessContext = new BusinessContext())
+            {
+                var keyword = new Keyword
+                {
+                    Name = "KeywordName",
+                    LanguageId = 0
+                };
+
+                businessContext.AddNewKeyword(keyword);
+            }
+        }
     }
 }
