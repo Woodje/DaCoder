@@ -4,10 +4,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace DaCoder.Data.Tests.FunctionalTests
 {
     [TestClass]
-    public class LanguageScenarioTests : FunctionalTest
+    public class KeywordScenarioTests : FunctionalTest
     {
         [TestMethod]
-        public void AddNewLanguageIsPersisted()
+        public void AddNewKeyWordIsPersisted()
         {
             using (var businessContext = new BusinessContext())
             {
@@ -18,7 +18,15 @@ namespace DaCoder.Data.Tests.FunctionalTests
 
                 businessContext.AddNewLanguage(language);
 
-                bool exists = businessContext.DataContext.Languages.Any(l => l.Id == language.Id);
+                var keyword = new Keyword
+                {
+                    Name = "KeywordName",
+                    LanguageId = 1,
+                };
+
+                businessContext.AddNewKeyword(keyword);
+
+                bool exists = businessContext.DataContext.Languages.Any(l => l.Id == keyword.Id);
 
                 Assert.IsTrue(exists);
             }
