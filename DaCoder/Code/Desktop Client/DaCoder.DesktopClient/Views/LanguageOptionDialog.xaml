@@ -1,0 +1,25 @@
+﻿<Window x:Class="DaCoder.DesktopClient.Views.LanguageOptionDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="LanguageOptionDialog" Height="300" Width="325" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="28" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300" />
+        </Grid.ColumnDefinitions>
+        <TabControl Grid.Row="0" Grid.Column="0" TabStripPlacement="Left" x:Name="languageTab">
+            <!--Bind headers here-->
+            <TabItem Header="C#">
+                <!--Bind datagrid here-->
+                <Label Content="Content goes here... its gonna be a datagrid" />
+            </TabItem>
+            <TabItem Header="Java" />
+            <TabItem Header="HTML" />
+        </TabControl>
+        <Button x:Name="btn_Add" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" MinWidth="80" Margin="3" Content="Add"  />
+        <Button x:Name="btn_Delete" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" MinWidth="80" Margin="3" Content="Delete"  />
+    </Grid>
+</Window>

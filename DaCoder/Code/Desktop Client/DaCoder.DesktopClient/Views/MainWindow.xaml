@@ -15,26 +15,43 @@
                     <Separator />
                     <MenuItem Header="_Exit" />
                 </MenuItem>
+            <MenuItem Header="_Edit">
+                <MenuItem Header="_Undo" Command="ApplicationCommands.Undo"/>
+                <Separator />
+                <MenuItem Header="C_ut" Command="ApplicationCommands.Cut"/>
+                <MenuItem Header="_Copy" Command="ApplicationCommands.Copy" />
+                <MenuItem Header="_Paste" Command="ApplicationCommands.Paste" />
+                <Separator />
+                <MenuItem Header="_Find..." Command="ApplicationCommands.Find" />
+                <MenuItem Header="_Replace" Command="ApplicationCommands.Replace" />
+                <Separator />
+                <MenuItem Header="_Select All" Command="ApplicationCommands.SelectAll" />
+            </MenuItem>
             <MenuItem Header="_View">
                 <MenuItem Header="" IsCheckable="True" />
                 <MenuItem Header="" IsCheckable="True" />
-                <Separator />
-                <MenuItem Header="_Exit" />
             </MenuItem>
             <MenuItem Header="_Plugins">
                 <MenuItem Header="_Install" />
                 <Separator />
                 <MenuItem Header="" IsCheckable="True" />
+            </MenuItem>
+            <MenuItem Header="_Languages">
+                <MenuItem Header="_Install" />
+                <MenuItem Header="C#" IsCheckable="True" />
                 <Separator />
-                <MenuItem Header="_Exit" />
+                <MenuItem Header="_Options" />
             </MenuItem>
             <MenuItem Header="_Help">
-                <MenuItem Header="_Version" />
                 <MenuItem Header="About DaCoder" />
-                <Separator />
-                <MenuItem Header="_Exit" />
             </MenuItem>
         </Menu>
-            <RichTextBox />
-        </DockPanel>
+        <RichTextBox>
+            <RichTextBox.Resources>
+                <Style TargetType="{x:Type Paragraph}">
+                    <Setter Property="Margin" Value="0"/>
+                </Style>
+            </RichTextBox.Resources>
+        </RichTextBox>
+    </DockPanel>
 </Window>
