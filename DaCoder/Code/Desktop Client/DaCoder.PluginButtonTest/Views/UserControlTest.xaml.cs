@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DaCoder.Core;
+using DaCoder.DesktopClient.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,28 +14,26 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using DaCoder.Core;
 
-namespace DaCoder.PluginButtonTest
+namespace DaCoder.PluginButtonTest.Views
 {
     /// <summary>
-    /// Interaction logic for UserControlButtonTest.xaml
+    /// Interaction logic for UserControlTest.xaml
     /// </summary>
-    public partial class UserControlButtonTest : UserControl, IPlugin
+    public partial class UserControlTest : UserControl, IPlugin
     {
-        public UserControlButtonTest()
+        public UserControlTest()
         {
             InitializeComponent();
         }
 
-        public string NameOfUserControl
-        {
-            get { return "UserControlButtonTest"; }
-        }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("This comes from plugin 'DaCoder.PluginButtonTest'");
+            MessageBox.Show("This comes from plugin 'DaCoder.UserControlTest'");
+
+            if (DataContext.GetType() == typeof(MainWindow))
+                ((MainWindow) DataContext).RichTextBoxControl.AppendText("koen");
         }
+
     }
 }

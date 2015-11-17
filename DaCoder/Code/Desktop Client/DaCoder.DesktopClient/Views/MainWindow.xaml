@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:DaCoder.DesktopClient.ViewModels"
         mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance viewModels:PluginInstallerViewModel}"
+        d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel}"
         Title="DaCoder">
 
     <DockPanel LastChildFill="True">
@@ -35,7 +35,7 @@
                 <MenuItem Header="" IsCheckable="True" />
             </MenuItem>
             <MenuItem Header="_Plugins">
-                <MenuItem Header="_Install" Command="{Binding AddPluginCommand}"/>
+                <MenuItem Header="_Install" Command="{Binding AddPluginDialogCommand}"/>
                 <Separator />
                 <MenuItem Header="" IsCheckable="True" />
             </MenuItem>
@@ -50,15 +50,14 @@
             </MenuItem>
         </Menu>
 
-        <Grid x:Name="RootContainer" Height="100" DockPanel.Dock="Bottom" />
-        
-        <RichTextBox>
+        <Grid x:Name="RootContainer" DockPanel.Dock="Bottom" />
+
+        <RichTextBox x:Name="RichTextBox" TextChanged="RichTextBoxText_Changed" SelectionChanged="RichTextBox_SelectionChanged">
             <RichTextBox.Resources>
                 <Style TargetType="{x:Type Paragraph}">
                     <Setter Property="Margin" Value="0"/>
                 </Style>
             </RichTextBox.Resources>
         </RichTextBox>
-        
     </DockPanel>
 </Window>

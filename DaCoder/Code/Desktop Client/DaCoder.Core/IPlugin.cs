@@ -8,6 +8,5 @@ namespace DaCoder.Core
     [InheritedExport(typeof(IPlugin))]
     public interface IPlugin
     {
-        string NameOfUserControl { get; }
     }
 }
