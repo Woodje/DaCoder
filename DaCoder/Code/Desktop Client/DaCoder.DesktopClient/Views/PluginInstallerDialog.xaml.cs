@@ -19,9 +19,18 @@ namespace DaCoder.DesktopClient.Views
     /// </summary>
     public partial class PluginInstallerDialog : Window
     {
-        public PluginInstallerDialog()
+        private readonly MainWindow mainWindow;
+
+        public MainWindow MainWindow
+        {
+            get { return mainWindow; }
+        }
+
+        public PluginInstallerDialog(MainWindow mainWindow)
         {
             InitializeComponent();
+
+            this.mainWindow = mainWindow;
         }
     }
 }
