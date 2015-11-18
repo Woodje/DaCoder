@@ -29,11 +29,52 @@ namespace DaCoder.PluginButtonTest.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("This comes from plugin 'DaCoder.UserControlTest'");
-
             if (DataContext.GetType() == typeof(MainWindow))
-                ((MainWindow) DataContext).RichTextBoxControl.AppendText("koen");
+            {
+                var richtextbox = ((MainWindow)DataContext).RichTextBoxControl;
+
+                if (!richtextbox.Selection.IsEmpty)
+                {
+                    string commentText = "//";
+
+                    string comment = Environment.NewLine + commentText;
+
+                    richtextbox.Selection.Start.InsertTextInRun(commentText);
+
+                    TextRange textRange = new TextRange(richtextbox.Selection.Start, richtextbox.Selection.End);
+
+                    string text = textRange.Text.Replace(Environment.NewLine, comment);
+
+                    if (text.EndsWith(comment))
+                        text = text.Remove(text.Length - comment.Length);
+
+                    richtextbox.Selection.Text = text;
+                }
+            }
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (DataContext.GetType() == typeof(MainWindow))
+            {
+                var richtextbox = ((MainWindow)DataContext).RichTextBoxControl;
+                if (!richtextbox.Selection.IsEmpty)
+                {
+                    string commentText = "//";
+
+                    string comment = Environment.NewLine + commentText;
+
+                    richtextbox.Selection.Start.InsertTextInRun(commentText);
+
+                    TextRange textRange = new TextRange(richtextbox.Selection.Start, richtextbox.Selection.End);
+
+                    string text = textRange.Text.Replace(commentText, null);
+
+                    richtextbox.Selection.Text = text;
+                }
+            }
+        }
+
 
     }
 }
