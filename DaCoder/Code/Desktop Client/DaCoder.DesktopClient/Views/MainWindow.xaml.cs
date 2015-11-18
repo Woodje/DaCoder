@@ -22,10 +22,7 @@ namespace DaCoder.DesktopClient.Views
         public MainWindowViewModel MainWindowViewModel { get; set; }
 
         public RichTextBox RichTextBoxControl {
-            get
-            {
-                return RichTextBox;
-            }
+            get { return RichTextBox; }
         }
 
         public string PluginPath
@@ -77,11 +74,6 @@ namespace DaCoder.DesktopClient.Views
         {
             if (DataContext.GetType() == typeof(MainWindowViewModel) && DataContext != null)
                 MainWindowViewModel.RichTextBoxText = new TextRange(RichTextBoxControl.Document.ContentStart, RichTextBoxControl.Document.ContentEnd).Text;
-        }
-
-        private void RichTextBox_SelectionChanged(object sender, RoutedEventArgs e)
-        {
-            Console.WriteLine(sender.GetType());
         }
     }
 }
