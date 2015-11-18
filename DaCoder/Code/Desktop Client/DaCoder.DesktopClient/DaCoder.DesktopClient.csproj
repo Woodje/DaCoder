@@ -120,6 +120,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ViewModels\LanguageOptionViewModel.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\PluginInstallerViewModel.cs" />
     <Compile Include="Views\AboutDialog.xaml.cs">
       <DependentUpon>AboutDialog.xaml</DependentUpon>
@@ -186,6 +188,10 @@
     <ProjectReference Include="..\DaCoder.Core\DaCoder.Core.csproj">
       <Project>{7ab2c705-2037-4cb3-9c12-cc77587321f9}</Project>
       <Name>DaCoder.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DaCoder.Data\DaCoder.Data.csproj">
+      <Project>{2561512b-cdd5-4185-b15a-fc515cadbc6d}</Project>
+      <Name>DaCoder.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

@@ -19,12 +19,10 @@ namespace DaCoder.DesktopClient
         {
             base.OnStartup(e);
 
-            var window = new MainWindow
-                         {
-                             DataContext = new PluginInstallerViewModel()
-                         };
-
-            window.ShowDialog();
+            var mainWindow = new MainWindow();
+            mainWindow.DataContext = new MainWindowViewModel(mainWindow);
+            mainWindow.MainWindowViewModel = (MainWindowViewModel) mainWindow.DataContext;
+            mainWindow.ShowDialog();
         }
     }
 }
