@@ -168,6 +168,5 @@ namespace DaCoder.DesktopClient.ViewModels
             languageOptionDialog.DataContext = new LanguageOptionViewModel();
             languageOptionDialog.ShowDialog();
         }
-
     }
 }
