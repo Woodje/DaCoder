@@ -14,6 +14,7 @@ using System.Linq;
 using System.Collections.ObjectModel;
 using System.Windows.Media;
 using Microsoft.Win32;
+using System.Diagnostics;
 
 namespace DaCoder.DesktopClient.ViewModels
 {
@@ -30,6 +31,8 @@ namespace DaCoder.DesktopClient.ViewModels
         public bool IsRichTextBoxTextAvailable { get; private set; }
 
         private string richTextBoxText;
+
+        private string fileName;
 
         public string RichTextBoxText
         {
@@ -186,7 +189,10 @@ namespace DaCoder.DesktopClient.ViewModels
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Show All Files (*.*)|*.*";
             if (saveFileDialog.ShowDialog() == true)
+            {
                 File.WriteAllText(saveFileDialog.FileName, RichTextBoxText);
+                fileName = saveFileDialog.FileName;
+            }
         }
 
         /// <summary>
@@ -224,6 +230,7 @@ namespace DaCoder.DesktopClient.ViewModels
                 try
                 {
                     RichTextBoxControl.AppendText(File.ReadAllText(openFileDialog.FileName));
+                    fileName = openFileDialog.FileName;
                 }
                 catch
                 {
@@ -232,5 +239,46 @@ namespace DaCoder.DesktopClient.ViewModels
             }
         }
 
+        /// <summary>
+        /// Gets the command that saves the file.
+        /// </summary>
+        public ActionCommand SaveCommand
+        {
+            get { return new ActionCommand(parameter => SaveFile()); }
+        }
+
+        /// <summary>
+        /// Saves the file if it exists else runs the save as function.
+        /// </summary>
+        private void SaveFile()
+        {
+            if (File.Exists(fileName))
+            {
+                File.WriteAllText(fileName, RichTextBoxText);
+            }
+            else
+            {
+                SaveFileAs();
+            }
+        }
+
+        /// <summary>
+        /// Gets the command that opens a new program process.
+        /// </summary>
+        public ActionCommand NewCommand
+        {
+            get { return new ActionCommand(parameter => New()); }
+        }
+
+        /// <summary>
+        /// Creates a new process of the program.
+        /// </summary>
+        private void New()
+        {
+            Process process = new Process();
+            process.StartInfo.FileName =
+                System.Reflection.Assembly.GetExecutingAssembly().Location;
+            process.Start();
+        }
     }
 }

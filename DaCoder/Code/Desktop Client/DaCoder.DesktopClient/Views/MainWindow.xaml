@@ -12,9 +12,9 @@
         <DockPanel LastChildFill="True">
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File">
-                    <MenuItem Header="_New" Command="ApplicationCommands.New"/>
+                    <MenuItem Header="_New" Command="{Binding NewCommand}"  />
                     <MenuItem Header="_Open..." Command="{Binding OpenCommand}"  />
-                    <MenuItem Header="_Save" Command="ApplicationCommands.Save" />
+                    <MenuItem Header="_Save" Command="{Binding SaveCommand}"  />
                     <MenuItem Header="_Save as..." Command="{Binding SaveFileAsCommand}"  />
                     <Separator />
                     <MenuItem Header="_Exit" Command="{Binding ExitCommand}"  />
