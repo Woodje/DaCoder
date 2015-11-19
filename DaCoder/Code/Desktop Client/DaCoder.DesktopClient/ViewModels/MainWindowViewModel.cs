@@ -46,7 +46,7 @@ namespace DaCoder.DesktopClient.ViewModels
             this.mainWindow = mainWindow;
 
             RichTextBoxControl = mainWindow.RichTextBoxControl;
-            
+
             Languages = new ObservableCollection<Language>();
 
             SelectedLanguages = new List<Language>();
@@ -84,7 +84,7 @@ namespace DaCoder.DesktopClient.ViewModels
             var searchInTextRange = new TextRange(RichTextBoxControl.Document.ContentStart, RichTextBoxControl.Document.ContentEnd);
 
             searchInTextRange.ApplyPropertyValue(TextElement.ForegroundProperty, new SolidColorBrush(Colors.Black));
-            
+
 
             using (var businessContext = new BusinessContext())
             {
@@ -204,5 +204,33 @@ namespace DaCoder.DesktopClient.ViewModels
         {
             Application.Current.Shutdown();
         }
+
+        /// <summary>
+        /// Gets the command that opens the open file dialog.
+        /// </summary>
+        public ActionCommand OpenCommand
+        {
+            get { return new ActionCommand(parameter => Open()); }
+        }
+
+        /// <summary>
+        /// Opens up the open file dialog.
+        /// </summary>
+        private void Open()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                try
+                {
+                    RichTextBoxControl.AppendText(File.ReadAllText(openFileDialog.FileName));
+                }
+                catch
+                {
+                    MessageBox.Show("File type not supported");
+                }
+            }
+        }
+
     }
 }
