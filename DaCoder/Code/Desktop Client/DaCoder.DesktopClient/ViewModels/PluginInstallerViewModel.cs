@@ -55,7 +55,7 @@ namespace DaCoder.DesktopClient.ViewModels
 
             if (File.Exists(pluginInstallerDialog.MainWindow.PluginPath + fileName))
             {
-                File.Delete(pluginInstallerDialog.MainWindow.PluginPath + fileName);
+                return;
             }
 
             File.Copy(FilePath, pluginInstallerDialog.MainWindow.PluginPath + fileName);

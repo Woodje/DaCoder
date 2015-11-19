@@ -72,6 +72,11 @@ namespace DaCoder.DesktopClient.Views
             }
         }
 
+        /// <summary>
+        /// Event raised when a the text is cahnged.
+        /// TODO: This should be converted to be done by pure binding instead using this event.
+        /// TODO: No solution other than codebehind found!
+        /// </summary>
         private void RichTextBoxText_Changed(object sender, TextChangedEventArgs e)
         {
             if (DataContext.GetType() == typeof(MainWindowViewModel) && DataContext != null)
@@ -79,6 +84,11 @@ namespace DaCoder.DesktopClient.Views
                     MainWindowViewModel.RichTextBoxText = new TextRange(RichTextBoxControl.Document.ContentStart, RichTextBoxControl.Document.ContentEnd).Text;
         }
 
+        /// <summary>
+        /// Event raised when a menuitem has been clicked.
+        /// TODO: This should be converted to be done by pure binding instead using this event.
+        /// TODO: No solution other than codebehind found!
+        /// </summary>
         private void MenuItem_Clicked(object sender, RoutedEventArgs e)
         {
             string selectedLanguage = ((MenuItem)sender).Header.ToString();

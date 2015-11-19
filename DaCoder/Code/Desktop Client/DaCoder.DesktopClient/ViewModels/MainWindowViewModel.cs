@@ -110,6 +110,9 @@ namespace DaCoder.DesktopClient.ViewModels
             IsRichTextBoxTextAvailable = true;
         }
 
+        /// <summary>
+        /// Looks for the provided text from the provided location.
+        /// </summary>
         TextRange FindTextFromTextPointerPosition(TextPointer textPointerPosition, string text)
         {
             while (textPointerPosition != null)
