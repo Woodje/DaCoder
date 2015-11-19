@@ -1,14 +1,14 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.IO;
-using System.Windows;
-using System.Windows.Input;
 using DaCoder.Core;
 using DaCoder.DesktopClient.Views;
 using Microsoft.Win32;
 
 namespace DaCoder.DesktopClient.ViewModels
 {
+    /// <summary>
+    /// A View-Model that represents a plugininstallerdialog.
+    /// </summary>
     public class PluginInstallerViewModel : ViewModel
     {
         private string filePath;
@@ -46,6 +46,9 @@ namespace DaCoder.DesktopClient.ViewModels
             }
         }
 
+        /// <summary>
+        /// Installs the chosen plugin.
+        /// </summary>
         private void InstallPlugin()
         {
             pluginInstallerDialog.Close();
@@ -71,6 +74,9 @@ namespace DaCoder.DesktopClient.ViewModels
             }
         }
 
+        /// <summary>
+        /// Makes it possible to browse for a plugin file.
+        /// </summary>
         public void BrowseForPluginFile()
         {
             var openFileDialog = new OpenFileDialog

@@ -1,18 +1,7 @@
 ﻿using DaCoder.Data;
-using DaCoder.DesktopClient.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace DaCoder.DesktopClient.Views
 {
@@ -26,6 +15,13 @@ namespace DaCoder.DesktopClient.Views
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Event raised when a cell has finished editing.
+        /// The edited cell is either updated or added to the database.
+        /// TODO: This should be converted to be done by pure binding instead using this event.
+        /// TODO: USE: xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" for binding!
+        /// TODO: USE: xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" for binding!
+        /// </summary>
         private void DataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
             using (var businessContext = new BusinessContext())
@@ -51,6 +47,14 @@ namespace DaCoder.DesktopClient.Views
             }
         }
 
+        /// <summary>
+        /// Event raised when key is pressed on a datagrid.
+        /// Checks if a cell was deleted.
+        /// If it was deleted then update the database.
+        /// TODO: This should be converted to be done by pure binding instead using this event.
+        /// TODO: USE: xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" for binding!
+        /// TODO: USE: xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" for binding!
+        /// </summary>
         private void KeywordsDataGrid_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (Key.Delete == e.Key)

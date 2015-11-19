@@ -1,11 +1,5 @@
-﻿using System;
-using System.IO;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
+﻿using System.Windows.Controls;
 using System.Windows.Documents;
-using System.Windows.Input;
 using DaCoder.Core;
 using DaCoder.DesktopClient.Views;
 using System.Collections.Generic;
