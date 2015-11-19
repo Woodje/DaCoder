@@ -188,5 +188,21 @@ namespace DaCoder.DesktopClient.ViewModels
             if (saveFileDialog.ShowDialog() == true)
                 File.WriteAllText(saveFileDialog.FileName, RichTextBoxText);
         }
+
+        /// <summary>
+        /// Gets the command that shutdown the program.
+        /// </summary>
+        public ActionCommand ExitCommand
+        {
+            get { return new ActionCommand(parameter => Exit()); }
+        }
+
+        /// <summary>
+        /// Shutdown the program.
+        /// </summary>
+        private void Exit()
+        {
+            Application.Current.Shutdown();
+        }
     }
 }
