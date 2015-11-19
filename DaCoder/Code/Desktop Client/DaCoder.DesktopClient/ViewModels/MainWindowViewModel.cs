@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using DaCoder.Data;
 using System.Linq;
 using System.Collections.ObjectModel;
+using System.Windows.Media;
 
 namespace DaCoder.DesktopClient.ViewModels
 {
@@ -21,12 +22,35 @@ namespace DaCoder.DesktopClient.ViewModels
 
         public ICollection<Language> Languages { get; set; }
 
-        public string RichTextBoxText { get; set; }
+        public List<Language> SelectedLanguages { get; set; }
+
+        public RichTextBox RichTextBoxControl { get; set; }
+
+        public bool IsRichTextBoxTextAvailable { get; private set; }
+
+        private string richTextBoxText;
+
+        public string RichTextBoxText
+        {
+            get { return richTextBoxText; }
+            set
+            {
+                richTextBoxText = value;
+                UseLanguage();
+            }
+        }
 
         public MainWindowViewModel(MainWindow mainWindow)
         {
             this.mainWindow = mainWindow;
+
+            RichTextBoxControl = mainWindow.RichTextBoxControl;
+            
             Languages = new ObservableCollection<Language>();
+
+            SelectedLanguages = new List<Language>();
+
+            IsRichTextBoxTextAvailable = true;
 
             using (var businessContext = new BusinessContext())
             {
@@ -39,6 +63,74 @@ namespace DaCoder.DesktopClient.ViewModels
                     Languages.Add(language);
                 }
             }
+        }
+
+        /// <summary>
+        /// Gets the command that makes it possible to use a language.
+        /// </summary>
+        public ActionCommand UseLanguageCommand
+        {
+            get { return new ActionCommand(parameter => UseLanguage()); }
+        }
+
+        /// <summary>
+        /// Uses the language.
+        /// </summary>
+        private void UseLanguage()
+        {
+            IsRichTextBoxTextAvailable = false;
+
+            var searchInTextRange = new TextRange(RichTextBoxControl.Document.ContentStart, RichTextBoxControl.Document.ContentEnd);
+
+            searchInTextRange.ApplyPropertyValue(TextElement.ForegroundProperty, new SolidColorBrush(Colors.Black));
+            
+
+            using (var businessContext = new BusinessContext())
+            {
+                foreach (var selectedLanguage in businessContext.DataContext.Languages)
+                {
+                    var language = SelectedLanguages.Find(l => l.Id == selectedLanguage.Id);
+                    if (language != null)
+                    {
+                        foreach (var keyword in selectedLanguage.Keywords)
+                        {
+                            TextRange foundInTextRange = FindTextFromTextPointerPosition(RichTextBoxControl.Document.ContentStart, keyword.Name);
+
+                            while (foundInTextRange != null)
+                            {
+                                foundInTextRange.ApplyPropertyValue(TextElement.ForegroundProperty, new SolidColorBrush(Colors.Blue));
+                                RichTextBoxControl.Selection.ApplyPropertyValue(TextElement.ForegroundProperty, new SolidColorBrush(Colors.Black));
+                                foundInTextRange = FindTextFromTextPointerPosition(foundInTextRange.End, keyword.Name);
+                            }
+                        }
+                    }
+                }
+            }
+
+            IsRichTextBoxTextAvailable = true;
+        }
+
+        TextRange FindTextFromTextPointerPosition(TextPointer textPointerPosition, string text)
+        {
+            while (textPointerPosition != null)
+            {
+                if (textPointerPosition.GetPointerContext(LogicalDirection.Forward) == TextPointerContext.Text)
+                {
+                    string textRun = textPointerPosition.GetTextInRun(LogicalDirection.Forward);
+
+                    int indexInRun = textRun.IndexOf(text);
+                    if (indexInRun >= 0)
+                    {
+                        TextPointer textPointerStartPosition = textPointerPosition.GetPositionAtOffset(indexInRun);
+                        TextPointer textPointerEndPosition = textPointerStartPosition.GetPositionAtOffset(text.Length);
+                        return new TextRange(textPointerStartPosition, textPointerEndPosition);
+                    }
+                }
+
+                textPointerPosition = textPointerPosition.GetNextContextPosition(LogicalDirection.Forward);
+            }
+
+            return null;
         }
 
         /// <summary>

@@ -39,10 +39,10 @@
                 <Separator />
                 <MenuItem Header="" IsCheckable="True" />
             </MenuItem>
-            <MenuItem Header="_Languages" ItemsSource="{Binding Languages}">
+            <MenuItem Header="_Languages" x:Name="LanguageMenuItems" ItemsSource="{Binding Languages}" >
                 <MenuItem.ItemTemplate>
                     <DataTemplate>
-                        <MenuItem Header="{Binding Name}" IsCheckable="True" />
+                        <MenuItem Header="{Binding Name}" Command="{Binding DataContext.UseLanguageCommand, RelativeSource={RelativeSource AncestorType=Window}}" IsCheckable="True" Click="MenuItem_Clicked"/>
                     </DataTemplate>
                 </MenuItem.ItemTemplate>
             </MenuItem>
