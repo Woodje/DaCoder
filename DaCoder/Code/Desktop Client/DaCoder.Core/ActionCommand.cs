@@ -1,15 +1,22 @@
-﻿using System;
+﻿// -----------------------------------------------------------------------------
+//  <copyright file="ActionCommand.cs" company="DCOM Engineering, LLC">
+//      Copyright (c) DCOM Engineering, LLC.  All rights reserved.
+//  </copyright>
+// -----------------------------------------------------------------------------
+using System;
 using System.Windows.Input;
 
 namespace DaCoder.Core
 {
+    /// <summary>
+    /// Credit for this class goes to "DCOM Engineering, LLC."
+    /// </summary>
     public class ActionCommand : ICommand
     {
         private readonly Action<Object> action;
         private readonly Predicate<Object> predicate;
 
-        public ActionCommand(Action<Object> action)
-            : this(action, null)
+        public ActionCommand(Action<Object> action) : this(action, null)
         {
         }
 

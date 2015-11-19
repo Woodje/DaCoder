@@ -17,7 +17,7 @@
                 1.0
             </TextBlock>
             
-            <Button HorizontalAlignment="Center" MinWidth="80" Margin="10" Content="Close"  />
+            <Button HorizontalAlignment="Center" MinWidth="80" Margin="10" Content="Close" IsCancel="True" />
         </StackPanel>
     </Grid>
 </Window>

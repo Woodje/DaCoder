@@ -1,15 +1,13 @@
-﻿using DaCoder.Core;
-using DaCoder.Data;
-using System;
+﻿using DaCoder.Data;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 
 namespace DaCoder.DesktopClient.ViewModels
 {
+    /// <summary>
+    /// A View-Model that represents a languageoptiondialog.
+    /// </summary>
     public class LanguageOptionViewModel
     {
         /// <summary>
@@ -22,6 +20,9 @@ namespace DaCoder.DesktopClient.ViewModels
             ReloadLanguageOptionsData();
         }
 
+        /// <summary>
+        /// Reloads the languages.
+        /// </summary>
         public void ReloadLanguageOptionsData()
         {
             Languages = new ObservableCollection<Language>();

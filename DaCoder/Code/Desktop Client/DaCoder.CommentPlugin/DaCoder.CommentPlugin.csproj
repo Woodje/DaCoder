@@ -7,8 +7,8 @@
     <ProjectGuid>{4F3117DA-B25F-4900-A865-B96BA732C8DC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DaCoder.PluginButtonTest</RootNamespace>
-    <AssemblyName>DaCoder.PluginButtonTest</AssemblyName>
+    <RootNamespace>DaCoder.CommentPlugin</RootNamespace>
+    <AssemblyName>DaCoder.CommentPlugin</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -46,12 +46,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\UserControlTest.xaml.cs">
-      <DependentUpon>UserControlTest.xaml</DependentUpon>
+    <Compile Include="Views\CommentPluginToolbar.xaml.cs">
+      <DependentUpon>CommentPluginToolbar.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\UserControlTest.xaml">
+    <Page Include="Views\CommentPluginToolbar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

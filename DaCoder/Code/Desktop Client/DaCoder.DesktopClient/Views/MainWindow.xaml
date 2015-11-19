@@ -8,60 +8,56 @@
         d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel}"
         Title="DaCoder">
 
-    <DockPanel LastChildFill="True">
+    <Grid>
+        <DockPanel LastChildFill="True">
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File">
-                <MenuItem Header="_New" Command="ApplicationCommands.New"/>
-                <MenuItem Header="_Open..." Command="ApplicationCommands.Open"/>
-                <MenuItem Header="_Save" Command="ApplicationCommands.Save" />
-                <MenuItem Header="_Save as..." Command="ApplicationCommands.SaveAs" />
+                    <MenuItem Header="_New" Command="{Binding NewCommand}"  />
+                    <MenuItem Header="_Open..." Command="{Binding OpenCommand}"  />
+                    <MenuItem Header="_Save" Command="{Binding SaveCommand}"  />
+                    <MenuItem Header="_Save as..." Command="{Binding SaveFileAsCommand}"  />
                     <Separator />
-                    <MenuItem Header="_Exit" />
+                    <MenuItem Header="_Exit" Command="{Binding ExitCommand}"  />
                 </MenuItem>
-            <MenuItem Header="_Edit">
-                <MenuItem Header="_Undo" Command="ApplicationCommands.Undo"/>
-                <Separator />
-                <MenuItem Header="C_ut" Command="ApplicationCommands.Cut"/>
-                <MenuItem Header="_Copy" Command="ApplicationCommands.Copy" />
-                <MenuItem Header="_Paste" Command="ApplicationCommands.Paste" />
-                <Separator />
-                <MenuItem Header="_Find..." Command="ApplicationCommands.Find" />
-                <MenuItem Header="_Replace" Command="ApplicationCommands.Replace" />
-                <Separator />
-                <MenuItem Header="_Select All" Command="ApplicationCommands.SelectAll" />
-            </MenuItem>
-            <MenuItem Header="_View">
-                <MenuItem Header="" IsCheckable="True" />
-                <MenuItem Header="" IsCheckable="True" />
-            </MenuItem>
-            <MenuItem Header="_Plugins">
-                <MenuItem Header="_Install" Command="{Binding AddPluginDialogCommand}"/>
-                <Separator />
-                <MenuItem Header="" IsCheckable="True" />
-            </MenuItem>
-            <MenuItem Header="_Languages" ItemsSource="{Binding Languages}">
-                <MenuItem.ItemTemplate>
-                    <DataTemplate>
-                        <MenuItem Header="{Binding Name}" IsCheckable="True" />
-                    </DataTemplate>
-                </MenuItem.ItemTemplate>
-            </MenuItem>
-            <MenuItem Header="_Options" >
-                <MenuItem Header="_Languages" Command="{Binding LanguageOptionDialogCommand}" />
-            </MenuItem>
-            <MenuItem Header="_Help">
-                <MenuItem Header="About DaCoder" />
-            </MenuItem>
-        </Menu>
+                <MenuItem Header="_Edit">
+                    <MenuItem Header="_Undo" Command="ApplicationCommands.Undo"/>
+                    <Separator />
+                    <MenuItem Header="C_ut" Command="ApplicationCommands.Cut"/>
+                    <MenuItem Header="_Copy" Command="ApplicationCommands.Copy" />
+                    <MenuItem Header="_Paste" Command="ApplicationCommands.Paste" />
+                    <Separator />
+                    <MenuItem Header="_Select All" Command="ApplicationCommands.SelectAll" />
+                </MenuItem>
+                <MenuItem Header="_Plugins">
+                    <MenuItem Header="_Install" Command="{Binding AddPluginDialogCommand}"/>
+                </MenuItem>
+                <MenuItem Header="_Languages" x:Name="LanguageMenuItems" ItemsSource="{Binding Languages}" >
+                    <MenuItem.ItemTemplate>
+                        <DataTemplate>
+                            <MenuItem Header="{Binding Name}" Command="{Binding DataContext.UseLanguageCommand, RelativeSource={RelativeSource AncestorType=Window}}" IsCheckable="True" Click="MenuItem_Clicked"/>
+                        </DataTemplate>
+                    </MenuItem.ItemTemplate>
+                </MenuItem>
+                <MenuItem Header="_Options" >
+                    <MenuItem Header="_Languages" Command="{Binding LanguageOptionDialogCommand}" />
+                </MenuItem>
+                <MenuItem Header="_Help">
+                    <MenuItem Header="About DaCoder" Command="{Binding OpenAboutDialogCommand}" />
+                </MenuItem>
+            </Menu>
 
-        <Grid x:Name="RootContainer" DockPanel.Dock="Bottom" />
+            <Grid x:Name="TopGrid" DockPanel.Dock="Top" />
+            <Grid x:Name="RightGrid" DockPanel.Dock="Right" />
+            <Grid x:Name="LeftGrid" DockPanel.Dock="Left" />
+            <Grid x:Name="BottomGrid" DockPanel.Dock="Bottom" />
 
-        <RichTextBox x:Name="RichTextBox" TextChanged="RichTextBoxText_Changed">
-            <RichTextBox.Resources>
-                <Style TargetType="{x:Type Paragraph}">
-                    <Setter Property="Margin" Value="0"/>
-                </Style>
-            </RichTextBox.Resources>
-        </RichTextBox>
-    </DockPanel>
+            <RichTextBox x:Name="RichTextBox" TextChanged="RichTextBoxText_Changed">
+                <RichTextBox.Resources>
+                    <Style TargetType="{x:Type Paragraph}">
+                        <Setter Property="Margin" Value="0"/>
+                    </Style>
+                </RichTextBox.Resources>
+            </RichTextBox>
+        </DockPanel>
+    </Grid>
 </Window>
