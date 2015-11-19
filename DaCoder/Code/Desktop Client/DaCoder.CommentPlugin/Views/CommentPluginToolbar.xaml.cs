@@ -1,5 +1,4 @@
-﻿using DaCoder.CommentPlugin.ViewModels;
-using DaCoder.Core;
+﻿using DaCoder.Core;
 using DaCoder.DesktopClient.Views;
 using System;
 using System.Collections.Generic;
