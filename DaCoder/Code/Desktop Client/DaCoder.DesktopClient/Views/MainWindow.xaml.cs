@@ -62,7 +62,7 @@ namespace DaCoder.DesktopClient.Views
                 var control = GetIMain.ToList()[0].Value as UserControl;
 
                 if (control != null)
-                    RootContainer.Children.Add(control);
+                    TopGrid.Children.Add(control);
 
                 control.DataContext = this;
             }
