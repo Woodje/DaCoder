@@ -9,6 +9,8 @@ using System.Collections.ObjectModel;
 using System.Windows.Media;
 using Microsoft.Win32;
 using System.Diagnostics;
+using System.IO;
+using System.Windows;
 
 namespace DaCoder.DesktopClient.ViewModels
 {
