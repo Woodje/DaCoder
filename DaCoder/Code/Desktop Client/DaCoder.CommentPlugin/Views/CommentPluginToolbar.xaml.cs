@@ -28,6 +28,9 @@ namespace DaCoder.CommentPlugin.Views
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Comment out the current line or the selected text
+        /// </summary>
         private void CommentOutCode_Click(object sender, RoutedEventArgs e)
         {
             if (DataContext.GetType() == typeof(MainWindow))
@@ -59,6 +62,9 @@ namespace DaCoder.CommentPlugin.Views
             }
         }
 
+        /// <summary>
+        /// Remove comments from the selected text
+        /// </summary>
         private void RemoveComments_Click(object sender, RoutedEventArgs e)
         {
             if (DataContext.GetType() == typeof(MainWindow))
