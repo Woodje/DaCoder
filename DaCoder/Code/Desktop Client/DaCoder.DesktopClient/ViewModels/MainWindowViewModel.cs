@@ -13,6 +13,7 @@ using DaCoder.Data;
 using System.Linq;
 using System.Collections.ObjectModel;
 using System.Windows.Media;
+using Microsoft.Win32;
 
 namespace DaCoder.DesktopClient.ViewModels
 {
@@ -167,6 +168,25 @@ namespace DaCoder.DesktopClient.ViewModels
             var languageOptionDialog = new LanguageOptionDialog();
             languageOptionDialog.DataContext = new LanguageOptionViewModel();
             languageOptionDialog.ShowDialog();
+        }
+
+        /// <summary>
+        /// Gets the command that opens the save file dialog.
+        /// </summary>
+        public ActionCommand SaveFileAsCommand
+        {
+            get { return new ActionCommand(parameter => SaveFileAs()); }
+        }
+
+        /// <summary>
+        /// Opens up the save file dialog.
+        /// </summary>
+        private void SaveFileAs()
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Show All Files (*.*)|*.*";
+            if (saveFileDialog.ShowDialog() == true)
+                File.WriteAllText(saveFileDialog.FileName, RichTextBoxText);
         }
     }
 }
