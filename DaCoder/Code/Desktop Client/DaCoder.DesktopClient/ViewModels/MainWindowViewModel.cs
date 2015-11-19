@@ -7,6 +7,8 @@ using DaCoder.Data;
 using System.Linq;
 using System.Collections.ObjectModel;
 using System.Windows.Media;
+using Microsoft.Win32;
+using System.Diagnostics;
 
 namespace DaCoder.DesktopClient.ViewModels
 {
@@ -24,6 +26,8 @@ namespace DaCoder.DesktopClient.ViewModels
 
         private string richTextBoxText;
 
+        private string fileName;
+
         public string RichTextBoxText
         {
             get { return richTextBoxText; }
@@ -39,7 +43,7 @@ namespace DaCoder.DesktopClient.ViewModels
             this.mainWindow = mainWindow;
 
             RichTextBoxControl = mainWindow.RichTextBoxControl;
-            
+
             Languages = new ObservableCollection<Language>();
 
             SelectedLanguages = new List<Language>();
@@ -77,7 +81,7 @@ namespace DaCoder.DesktopClient.ViewModels
             var searchInTextRange = new TextRange(RichTextBoxControl.Document.ContentStart, RichTextBoxControl.Document.ContentEnd);
 
             searchInTextRange.ApplyPropertyValue(TextElement.ForegroundProperty, new SolidColorBrush(Colors.Black));
-            
+
 
             using (var businessContext = new BusinessContext())
             {
@@ -161,6 +165,131 @@ namespace DaCoder.DesktopClient.ViewModels
             var languageOptionDialog = new LanguageOptionDialog();
             languageOptionDialog.DataContext = new LanguageOptionViewModel();
             languageOptionDialog.ShowDialog();
+        }
+
+        /// <summary>
+        /// Gets the command that opens the save file dialog.
+        /// </summary>
+        public ActionCommand SaveFileAsCommand
+        {
+            get { return new ActionCommand(parameter => SaveFileAs()); }
+        }
+
+        /// <summary>
+        /// Opens up the save file dialog.
+        /// </summary>
+        private void SaveFileAs()
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Show All Files (*.*)|*.*";
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                File.WriteAllText(saveFileDialog.FileName, RichTextBoxText);
+                fileName = saveFileDialog.FileName;
+            }
+        }
+
+        /// <summary>
+        /// Gets the command that shutdown the program.
+        /// </summary>
+        public ActionCommand ExitCommand
+        {
+            get { return new ActionCommand(parameter => Exit()); }
+        }
+
+        /// <summary>
+        /// Shutdown the program.
+        /// </summary>
+        private void Exit()
+        {
+            Application.Current.Shutdown();
+        }
+
+        /// <summary>
+        /// Gets the command that opens the open file dialog.
+        /// </summary>
+        public ActionCommand OpenCommand
+        {
+            get { return new ActionCommand(parameter => Open()); }
+        }
+
+        /// <summary>
+        /// Opens up the open file dialog.
+        /// </summary>
+        private void Open()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                try
+                {
+                    RichTextBoxControl.AppendText(File.ReadAllText(openFileDialog.FileName));
+                    fileName = openFileDialog.FileName;
+                }
+                catch
+                {
+                    MessageBox.Show("File type not supported");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets the command that saves the file.
+        /// </summary>
+        public ActionCommand SaveCommand
+        {
+            get { return new ActionCommand(parameter => SaveFile()); }
+        }
+
+        /// <summary>
+        /// Saves the file if it exists else runs the save as function.
+        /// </summary>
+        private void SaveFile()
+        {
+            if (File.Exists(fileName))
+            {
+                File.WriteAllText(fileName, RichTextBoxText);
+            }
+            else
+            {
+                SaveFileAs();
+            }
+        }
+
+        /// <summary>
+        /// Gets the command that opens a new program process.
+        /// </summary>
+        public ActionCommand NewCommand
+        {
+            get { return new ActionCommand(parameter => New()); }
+        }
+
+        /// <summary>
+        /// Creates a new process of the program.
+        /// </summary>
+        private void New()
+        {
+            Process process = new Process();
+            process.StartInfo.FileName =
+                System.Reflection.Assembly.GetExecutingAssembly().Location;
+            process.Start();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ActionCommand OpenAboutDialogCommand
+        {
+            get { return new ActionCommand(parameter => OpenAboutDialog()); }
+        }
+
+        /// <summary>
+        /// Creates a new process of the program.
+        /// </summary>
+        private void OpenAboutDialog()
+        {
+            var aboutDialog = new AboutDialog();
+            aboutDialog.ShowDialog();
         }
     }
 }
