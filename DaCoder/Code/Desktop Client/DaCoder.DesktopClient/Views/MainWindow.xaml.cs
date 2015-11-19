@@ -9,6 +9,8 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using DaCoder.Core;
 using DaCoder.DesktopClient.ViewModels;
+using DaCoder.Data;
+using System.Windows.Media;
 
 namespace DaCoder.DesktopClient.Views
 {
@@ -17,6 +19,12 @@ namespace DaCoder.DesktopClient.Views
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// Import Classes using IPlugin
+        /// </summary>
+        [ImportMany(typeof (IPlugin))]
+        public IEnumerable<Lazy<IPlugin>> GetIMain { get; set; }
+
         private readonly string pluginPath;
 
         public MainWindowViewModel MainWindowViewModel { get; set; }
@@ -29,12 +37,6 @@ namespace DaCoder.DesktopClient.Views
         {
             get { return pluginPath; }
         }
-
-        /// <summary>
-        /// Import Classes
-        /// </summary>
-        [ImportMany(typeof (IPlugin))]
-        public IEnumerable<Lazy<IPlugin>> GetIMain { get; set; }
 
         public MainWindow()
         {
@@ -73,7 +75,35 @@ namespace DaCoder.DesktopClient.Views
         private void RichTextBoxText_Changed(object sender, TextChangedEventArgs e)
         {
             if (DataContext.GetType() == typeof(MainWindowViewModel) && DataContext != null)
-                MainWindowViewModel.RichTextBoxText = new TextRange(RichTextBoxControl.Document.ContentStart, RichTextBoxControl.Document.ContentEnd).Text;
+                if (MainWindowViewModel.IsRichTextBoxTextAvailable)
+                    MainWindowViewModel.RichTextBoxText = new TextRange(RichTextBoxControl.Document.ContentStart, RichTextBoxControl.Document.ContentEnd).Text;
         }
+
+        private void MenuItem_Clicked(object sender, RoutedEventArgs e)
+        {
+            string selectedLanguage = ((MenuItem)sender).Header.ToString();
+
+            foreach (var menuItem in LanguageMenuItems.Items)
+            {
+                if (((Language)menuItem).Name == selectedLanguage)
+                {
+                    if (DataContext.GetType() == typeof(MainWindowViewModel) && DataContext != null)
+                    {
+                        var language = MainWindowViewModel.SelectedLanguages.Find(l => l.Id == ((Language)menuItem).Id);
+                        if (language == null)
+                        {
+                            MainWindowViewModel.SelectedLanguages.Add((Language)menuItem);
+                            ((MenuItem)sender).IsChecked = true;
+                        }
+                        else
+                        {
+                            MainWindowViewModel.SelectedLanguages.Remove(language);
+                            ((MenuItem)sender).IsChecked = false;
+                        }
+                    }
+                }
+            }
+        }
+
     }
 }
