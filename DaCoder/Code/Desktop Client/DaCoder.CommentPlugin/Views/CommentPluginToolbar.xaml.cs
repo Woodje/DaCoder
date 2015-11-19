@@ -1,4 +1,5 @@
-﻿using DaCoder.Core;
+﻿using DaCoder.CommentPlugin.ViewModels;
+using DaCoder.Core;
 using DaCoder.DesktopClient.Views;
 using System;
 using System.Collections.Generic;
@@ -15,19 +16,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DaCoder.PluginButtonTest.Views
+namespace DaCoder.CommentPlugin.Views
 {
     /// <summary>
-    /// Interaction logic for UserControlTest.xaml
+    /// Interaction logic for CommentPluginToolbar.xaml
     /// </summary>
-    public partial class UserControlTest : UserControl, IPlugin
+    public partial class CommentPluginToolbar : UserControl, IPlugin
     {
-        public UserControlTest()
+        public CommentPluginToolbar()
         {
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void CommentOutCode_Click(object sender, RoutedEventArgs e)
         {
             if (DataContext.GetType() == typeof(MainWindow))
             {
@@ -45,15 +46,20 @@ namespace DaCoder.PluginButtonTest.Views
 
                     string text = textRange.Text.Replace(Environment.NewLine, comment);
 
+                    // Remove the comment from the last line
                     if (text.EndsWith(comment))
                         text = text.Remove(text.Length - comment.Length);
 
                     richtextbox.Selection.Text = text;
                 }
+                else
+                {
+                    richtextbox.CaretPosition.GetLineStartPosition(0).InsertTextInRun("// ");
+                }
             }
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void RemoveComments_Click(object sender, RoutedEventArgs e)
         {
             if (DataContext.GetType() == typeof(MainWindow))
             {
@@ -74,7 +80,5 @@ namespace DaCoder.PluginButtonTest.Views
                 }
             }
         }
-
-
     }
 }
