@@ -280,5 +280,22 @@ namespace DaCoder.DesktopClient.ViewModels
                 System.Reflection.Assembly.GetExecutingAssembly().Location;
             process.Start();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ActionCommand OpenAboutDialogCommand
+        {
+            get { return new ActionCommand(parameter => OpenAboutDialog()); }
+        }
+
+        /// <summary>
+        /// Creates a new process of the program.
+        /// </summary>
+        private void OpenAboutDialog()
+        {
+            var aboutDialog = new AboutDialog();
+            aboutDialog.ShowDialog();
+        }
     }
 }

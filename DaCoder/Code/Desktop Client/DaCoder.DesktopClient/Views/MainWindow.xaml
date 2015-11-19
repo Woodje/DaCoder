@@ -26,19 +26,10 @@
                     <MenuItem Header="_Copy" Command="ApplicationCommands.Copy" />
                     <MenuItem Header="_Paste" Command="ApplicationCommands.Paste" />
                     <Separator />
-                    <MenuItem Header="_Find..." Command="ApplicationCommands.Find" />
-                    <MenuItem Header="_Replace" Command="ApplicationCommands.Replace" />
-                    <Separator />
                     <MenuItem Header="_Select All" Command="ApplicationCommands.SelectAll" />
-                </MenuItem>
-                <MenuItem Header="_View">
-                    <MenuItem Header="" IsCheckable="True" />
-                    <MenuItem Header="" IsCheckable="True" />
                 </MenuItem>
                 <MenuItem Header="_Plugins">
                     <MenuItem Header="_Install" Command="{Binding AddPluginDialogCommand}"/>
-                    <Separator />
-                    <MenuItem Header="" IsCheckable="True" />
                 </MenuItem>
                 <MenuItem Header="_Languages" x:Name="LanguageMenuItems" ItemsSource="{Binding Languages}" >
                     <MenuItem.ItemTemplate>
@@ -51,7 +42,7 @@
                     <MenuItem Header="_Languages" Command="{Binding LanguageOptionDialogCommand}" />
                 </MenuItem>
                 <MenuItem Header="_Help">
-                    <MenuItem Header="About DaCoder" />
+                    <MenuItem Header="About DaCoder" Command="{Binding OpenAboutDialogCommand}" />
                 </MenuItem>
             </Menu>
 
