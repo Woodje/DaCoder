@@ -54,7 +54,7 @@ namespace DaCoder.CommentPlugin.Views
 
                     richtextbox.Selection.Text = text;
                 }
-                else
+                else if (richtextbox.IsFocused)
                 {
                     richtextbox.CaretPosition.GetLineStartPosition(0).InsertTextInRun("// ");
                 }
