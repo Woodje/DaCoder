@@ -1,5 +1,4 @@
 ﻿using System;
-using System.CodeDom;
 
 namespace DaCoder.Data
 {
@@ -11,11 +10,17 @@ namespace DaCoder.Data
         private readonly DataContext dataContext;
         private bool disposed;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BusinessContext"/> class.
+        /// </summary>
         public BusinessContext()
         {
             dataContext = new DataContext();
         }
 
+        /// <summary>
+        /// Gets the underlying <see cref="DataContext"/>.
+        /// </summary>
         public DataContext DataContext
         {
             get { return dataContext; }
@@ -109,7 +114,7 @@ namespace DaCoder.Data
         }
 
         /// <summary>
-        /// Static class used for checking common requirements.
+        /// Static class used for checking non-specific common requirements.
         /// </summary>
         static class Check
         {

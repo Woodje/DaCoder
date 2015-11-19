@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace DaCoder.Data
 {
+    /// <summary>
+    /// Language entity.
+    /// </summary>
     public class Language
     {
         public int Id { get; set; }

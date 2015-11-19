@@ -8,6 +8,7 @@ namespace DaCoder.Core
 {
     /// <summary>
     /// Base class for a View-Model in the MVVM pattern.
+    /// Credit for this class goes to "DCOM Engineering, LLC."
     /// </summary>
     public abstract class ViewModel : ObservableObject, IDataErrorInfo
     {
